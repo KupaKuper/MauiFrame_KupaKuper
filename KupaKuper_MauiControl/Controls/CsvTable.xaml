@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:KupaKuper_MauiControl.Controls"
+             x:Class="KupaKuper_MauiControl.Controls.CsvTable"
+             x:Name="csvTable"
+             SizeChanged="OnSizeChanged">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/MyStyles.xaml;assembly=KupaKuper_MauiControl" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Grid RowDefinitions="Auto,*" Padding="10,0,10,5" RowSpacing="5">
+        <!-- 文件选择器 -->
+        <Border Grid.Row="0"
+                Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray700}}"
+                StrokeThickness="1"
+                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                StrokeShape="RoundRectangle 8"
+                HorizontalOptions="Start"
+                IsVisible="{Binding Source={x:Reference csvTable}, Path=IsPickerVisible}">
+            <Grid ColumnDefinitions="Auto,*">
+                <Label Grid.Column="0"
+                       Text="选择文件:"
+                       VerticalOptions="Center"
+                       Margin="0,0,10,0"/>
+                <Picker Grid.Column="1"
+                        x:Name="_picker"
+                        ItemsSource="{Binding Source={x:Reference csvTable}, Path=FileNames}"
+                        SelectedIndexChanged="OnPickerSelectedIndexChanged"
+                        VerticalOptions="Center"/>
+            </Grid>
+        </Border>
+
+        <!-- 搜索栏 -->
+        <Border Grid.Row="0"
+                StrokeThickness="0"
+                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                StrokeShape="RoundRectangle 8"
+                HorizontalOptions="End"
+                IsVisible="{Binding Source={x:Reference csvTable}, Path=IsSearchVisible}">
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Grid.Column="0"
+                       Text="关键字搜索:"
+                       VerticalOptions="Center"
+                       FontSize="15"
+                       Margin="0,0,10,0"/>
+                <Entry Grid.Column="1"
+                       Placeholder="搜索..."
+                       MinimumWidthRequest="150"
+                       Text="{Binding Source={x:Reference csvTable}, Path=ViewModel.SearchText}"
+                       VerticalOptions="Center"/>
+            </Grid>
+        </Border>
+
+        <!-- 表格容器 -->
+        <Border Grid.Row="{Binding Source={x:Reference csvTable}, Path=TableGridRow}"
+                Grid.RowSpan="{Binding Source={x:Reference csvTable}, Path=TableGridRowSpan}"
+                Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray700}}"
+                StrokeThickness="1"
+                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                StrokeShape="RoundRectangle 8">
+            <Grid RowDefinitions="Auto,*">
+                <!-- 表头 (固定) -->
+                <Grid Grid.Row="0" 
+                      Padding="0"
+                      Margin="0"
+                      BackgroundColor="{StaticResource blueColor}">
+                    <HorizontalStackLayout Spacing="0" Margin="0"
+                                         BindableLayout.ItemsSource="{Binding Source={x:Reference csvTable}, Path=ViewModel.ColumnDefinitions}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Border WidthRequest="{Binding Width}" 
+                                        Padding="0"
+                                        Margin="0"
+                                        StrokeThickness="0">
+                                    <Label Text="{Binding Title}"
+                                           TextColor="White"
+                                           FontAttributes="Bold"
+                                           FontSize="{Binding FontSize}"
+                                           Padding="{Binding Padding}"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"/>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </HorizontalStackLayout>
+                </Grid>
+
+                <!-- 数据行 -->
+                <GraphicsView Grid.Row="1"
+                              x:Name="tableGraphicsView"
+                              Drawable="{Binding Source={x:Reference csvTable}, Path=TableDrawable}"
+                              StartInteraction="OnStartInteraction"
+                              DragInteraction="OnDragInteraction"
+                              EndInteraction="OnEndInteraction"
+                              InputTransparent="False">
+                </GraphicsView>
+
+                <!-- 无数据时的显示内容 -->
+                <Grid Grid.Row="1" 
+                      x:Name="emptyView"
+                      IsVisible="{Binding Source={x:Reference csvTable}, Path=IsEmptyViewVisible}">
+                    <VerticalStackLayout HorizontalOptions="Center" 
+                                         VerticalOptions="Center">
+                        <Label Text="暂无数据"
+                               TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</ContentView>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mycontrol="clr-namespace:KupaKuper_MauiControl.Controls;assembly=KupaKuper_MauiControl"
+             xmlns:loca="clr-namespace:KupaKuper_HmiView.ContentViewModes"
+             x:DataType="loca:CylinderViewVM"
+             x:Class="KupaKuper_HmiView.ContentViews.CylinderView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/MyStyles.xaml;assembly=KupaKuper_MauiControl" />
+                <ResourceDictionary Source="/Resources/MyStyles.xaml;assembly=KupaKuper_HmiView" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Grid ColumnDefinitions="Auto,*">
+        <!-- 左侧组别按钮列表 -->
+        <Border Grid.Column="0" 
+                Margin="5"
+                Padding="5"
+                WidthRequest="150"
+                StrokeShape="RoundRectangle 10"
+                Background="{StaticResource Key=BackgroundStyle}">
+            <CollectionView ItemsSource="{Binding GroupNames}"
+                           SelectedItem="{Binding CurrentGroupKey}"
+                           SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="x:String">
+                        <Grid Padding="5">
+                            <mycontrol:HmiButton Text="{Binding}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type loca:CylinderViewVM}}, Path=SwitchGroupCommand}"
+                                    CommandParameter="{Binding}"
+                                    Style="{StaticResource HmiButtonStyle}"
+                                    Clicked="HmiButton_Clicked"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Border>
+
+        <!-- 右侧气缸显示区域 -->
+        <Grid Grid.Column="1" RowDefinitions="*">
+            <!-- 气缸显示区域 -->
+            <mycontrol:HmiCylinderList Grid.Row="0" CylinderItems="{Binding CurrentPageCylinderNames}" CylinderClick="HmiCylinderList_CylinderClick"/>
+        </Grid>
+    </Grid>
+</ContentView>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?><!--设备数据监控界面-->
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KupaKuper_HmiView.ContentViews.FaultStatisticsView"
+             xmlns:local="clr-namespace:KupaKuper_HmiView.ContentViewModes"
+             x:DataType="local:FaultStatisticsViewVM"
+             xmlns:myControl="clr-namespace:KupaKuper_MauiControl.Controls;assembly=KupaKuper_MauiControl"
+             xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/MyStyles.xaml;assembly=KupaKuper_MauiControl" />
+                <ResourceDictionary Source="/Resources/MyStyles.xaml;assembly=KupaKuper_HmiView" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Grid RowDefinitions="*" ColumnDefinitions="*,*">
+        <myControl:BasicPie Grid.Row="0" Grid.Column="0" DataSeries="{Binding DataSeries}"/>
+        <myControl:BasicPie Grid.Row="0" Grid.Column="1" DataSeries="{Binding DataTimeSeries}"/>
+    </Grid>
+</ContentView>
