@@ -8,6 +8,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+                <ResourceDictionary Source="/Resources/MyStyles.xaml;assembly=KupaKuper_HmiView"/>
+                <ResourceDictionary Source="/Resources/MyStyles.xaml;assembly=KupaKuper_MauiControl"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

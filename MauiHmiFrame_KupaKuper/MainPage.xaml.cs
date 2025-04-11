@@ -1,24 +1,24 @@
-﻿namespace MauiHmiFrame_KupaKuper
+﻿using LocalizationResourceManager.Maui;
+
+namespace MauiHmiFrame_KupaKuper
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
-        public MainPage()
+        private readonly MainPageMode _pageMode;
+        public MainPage(ILocalizationResourceManager resourceManager)
         {
             InitializeComponent();
+            BindingContext = _pageMode = new();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private void Button_Clicked(object sender, EventArgs e)
         {
-            count++;
+            _pageMode.ChangeUpPage(switchViews);
+        }
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+        private void switchViews_CurrentViewChanged(uint ViewIndex)
+        {
+            _pageMode.Message = ViewIndex.ToString();
         }
     }
 
