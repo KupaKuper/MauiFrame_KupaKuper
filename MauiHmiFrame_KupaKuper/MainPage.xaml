@@ -6,11 +6,74 @@
              xmlns:local="clr-namespace:MauiHmiFrame_KupaKuper"
              x:DataType="local:MainPageMode"
              x:Class="MauiHmiFrame_KupaKuper.MainPage">
-    <Grid RowDefinitions="auto,*">
-        <HorizontalStackLayout Grid.Row="0">
-            <Button Text="Page" Clicked="Button_Clicked"/>
-            <Label Text="{Binding Message}"/>
-        </HorizontalStackLayout>
-        <myControl:SwitchableContentView Grid.Row="1" ViewSource="{Binding CurrentViews}" x:Name="switchViews" CurrentViewChanged="switchViews_CurrentViewChanged"/>
+    <ContentPage.Resources>
+        <ResourceDictionary Source="/Resources/MyStyles.xaml;assembly=KupaKuper_HmiView"/>
+        <ResourceDictionary Source="/Resources/MyStyles.xaml;assembly=KupaKuper_MauiControl"/>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="auto,*" Padding="0,0,0,3">
+        <Grid Grid.Row="0" ColumnSpacing="{OnIdiom 10,Phone=0}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
+                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
+                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
+                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
+                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
+                <ColumnDefinition Width="{OnIdiom 200,Phone=140}"/>
+                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
+                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
+                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
+                <ColumnDefinition Width="{OnIdiom *,Phone=*}"/>
+                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
+                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
+            </Grid.ColumnDefinitions>
+            <myControl:HmiButton x:Name="Go_HomePage"
+                Grid.Column="0"
+                Command="{Binding SetViewCommand}"
+                CommandParameter="1"
+                Background="{Binding SelectedViewIndex, Converter={StaticResource ViewIndexToColorConverter}, ConverterParameter='1'}"
+                FontFamily="iconfont" Text="&#xe601;" FontSize="{OnIdiom 45, Phone=33}" Style="{StaticResource Key=HomeButtonStyle}"/>
+            <myControl:HmiButton x:Name="Go_SettingPage"
+                Grid.Column="1"
+                Command="{Binding SetViewCommand}"
+                CommandParameter="2"
+                Background="{Binding SelectedViewIndex, Converter={StaticResource ViewIndexToColorConverter}, ConverterParameter='2'}"
+                FontFamily="iconfont" Text="&#xe60f;" FontSize="{OnIdiom 45, Phone=33}" Style="{StaticResource Key=HomeButtonStyle}"/>
+            <myControl:HmiButton x:Name="Go_VisionPage"
+                Grid.Column="2"
+                Command="{Binding SetViewCommand}"
+                CommandParameter="3"
+                Background="{Binding SelectedViewIndex, Converter={StaticResource ViewIndexToColorConverter}, ConverterParameter='3'}"
+                FontFamily="iconfont" Text="&#xe60c;" FontSize="{OnIdiom 45, Phone=33}" Style="{StaticResource Key=HomeButtonStyle}"/>
+            <myControl:HmiButton x:Name="Go_AlarmPage"
+                Grid.Column="3"
+                Command="{Binding SetViewCommand}"
+                CommandParameter="4"
+                Background="{Binding SelectedViewIndex, Converter={StaticResource ViewIndexToColorConverter}, ConverterParameter='4'}"
+                FontFamily="iconfont" Text="&#xe60a;" FontSize="{OnIdiom 45, Phone=33}" Style="{StaticResource Key=HomeButtonStyle}"/>
+            <myControl:HmiButton x:Name="Go_DataPage"
+                Grid.Column="4"
+                Command="{Binding SetViewCommand}"
+                CommandParameter="5"
+                Background="{Binding SelectedViewIndex, Converter={StaticResource ViewIndexToColorConverter}, ConverterParameter='5'}"
+                FontFamily="iconfont" Text="&#xe604;" FontSize="{OnIdiom 45, Phone=33}" Style="{StaticResource Key=HomeButtonStyle}"/>
+            <myControl:HmiButton x:Name="LogeButton" Grid.Column="5" FontFamily="iconfont" Text="SECOTE" FontSize="{OnIdiom 30, Phone=23}" Style="{StaticResource Key=HomeButtonStyle}" Clicked="LogeButton_Clicked" BackgroundColor="{Binding PlcConnect, Converter={StaticResource BoolToColorConverter},ConverterParameter='#7fff00,Red'}"/>
+            <myControl:HmiButton x:Name="StartButton" Grid.Column="6" FontFamily="iconfont" Text="&#xe87c;" FontSize="{OnIdiom 35, Phone=27}" BackgroundColor="Transparent" Style="{StaticResource Key=HomeButtonStyle}" Clicked="StartButton_Clicked"/>
+            <myControl:HmiButton x:Name="StopButton" Grid.Column="7" FontFamily="iconfont" Text="&#xe618;" FontSize="{OnIdiom 35, Phone=27}" BackgroundColor="Transparent" Style="{StaticResource Key=HomeButtonStyle}" Clicked="StopButton_Clicked"/>
+            <myControl:HmiButton x:Name="ResetButton" Grid.Column="8" FontFamily="iconfont" Text="&#xeb17;" FontSize="{OnIdiom 35, Phone=27}" BackgroundColor="Transparent" Style="{StaticResource Key=HomeButtonStyle}" Clicked="ResetButton_Clicked"/>
+            <myControl:HmiButton x:Name="SystemSet"
+                Grid.Column="10" 
+                Command="{Binding SetViewCommand}"
+                CommandParameter="6"
+                Background="{Binding SelectedViewIndex, Converter={StaticResource ViewIndexToColorConverter}, ConverterParameter='6'}"
+                FontFamily="iconfont" Text="&#xe632;" FontSize="{OnIdiom 35, Phone=27}" BackgroundColor="Transparent" FontAttributes="None" Style="{StaticResource Key=HomeButtonStyle}"/>
+            <myControl:HmiButton x:Name="LoginButton"
+                Grid.Column="11"
+                Command="{Binding SetViewCommand}"
+                CommandParameter="7"
+                Background="{Binding SelectedViewIndex, Converter={StaticResource ViewIndexToColorConverter}, ConverterParameter='7'}"
+                TextColor="{Binding IsAdmini, Converter={StaticResource BoolToColorConverter},ConverterParameter='orangeColor,Gray500'}"
+                FontFamily="iconfont" Text="&#xe606;" FontSize="{OnIdiom 35, Phone=27}" FontAttributes="Bold" Style="{StaticResource Key=HomeButtonStyle}"/>
+        </Grid>
+        <myControl:SwitchableContentView Grid.Row="1" ViewSource="{Binding CurrentViews}" x:Name="switchViews" CurrentViewChanged="SwitchViews_CurrentViewChanged"/>
     </Grid>
 </ContentPage>
