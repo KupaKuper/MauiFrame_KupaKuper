@@ -66,12 +66,12 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-		<PackageReference Include="KupaKuper_HmiView" Version="1.0.1" />
+		<PackageReference Include="KupaKuper_HmiView" Version="1.0.2" />
 		<PackageReference Include="KupaKuper_IO" Version="1.0.1" />
-		<PackageReference Include="KupaKuper_MauiControl" Version="1.0.1" />
+		<PackageReference Include="KupaKuper_MauiControl" Version="1.0.3" />
 		<PackageReference Include="LocalizationResourceManager.Maui" Version="1.2.2" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.60" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.4" />
 	</ItemGroup>
 
 	<ItemGroup>

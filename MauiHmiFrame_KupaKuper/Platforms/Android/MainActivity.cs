@@ -112,3 +112,4 @@ namespace MauiHmiFrame_KupaKuper
             }
         }
     }
+}
