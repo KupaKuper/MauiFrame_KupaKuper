@@ -66,18 +66,15 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-		<PackageReference Include="KupaKuper_HmiView" Version="1.0.2" />
-		<PackageReference Include="KupaKuper_IO" Version="1.0.1" />
-		<PackageReference Include="KupaKuper_MauiControl" Version="1.0.3" />
 		<PackageReference Include="LocalizationResourceManager.Maui" Version="1.2.2" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.60" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.4" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Reference Include="KupaKuper_IO">
-	    <HintPath>..\..\MauiLibrary_KupaKuper\KupaKuper_IO\bin\Release\net9.0\KupaKuper_IO.dll</HintPath>
-	  </Reference>
+	  <ProjectReference Include="..\..\MauiLibrary_KupaKuper\KupaKuper_HmiView\KupaKuper_HmiView.csproj" />
+	  <ProjectReference Include="..\..\MauiLibrary_KupaKuper\KupaKuper_IO\KupaKuper_IO.csproj" />
+	  <ProjectReference Include="..\..\MauiLibrary_KupaKuper\KupaKuper_MauiControl\KupaKuper_MauiControl.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -53,7 +53,11 @@ namespace MauiHmiFrame_KupaKuper
         /// <summary>
         /// 定时执行触发方法
         /// </summary>
-        public static event CyclicRun CyclincRunning;
+        public static event CyclicRun? CyclincRunning;
+        /// <summary>
+        /// 记录每个页面集合最后一次显示的页面序号(页面集合序号,页面id号)
+        /// </summary>
+        private Dictionary<uint, uint> PageLastViewIndex = new();
 
         protected override bool OnBackButtonPressed()
         {
@@ -154,12 +158,15 @@ namespace MauiHmiFrame_KupaKuper
         private void InitVM()
         {
             BindingContext = _pageMode;
+            _pageMode.PageButtonWidth = Math.Min(this.Width / 14, 50);
+            _pageMode.LogButtonWidth = Math.Min(this.Width / 14 * 3, 200);
             // 监听SelectedViewIndex的变化
             _pageMode.PropertyChanged += (s, e) =>
             {
                 if (e.PropertyName == nameof(_pageMode.SelectedViewIndex))
                 {
-                    ChangeHomePage(_pageMode.SelectedViewIndex);
+                    uint viewIndex = PageLastViewIndex.TryGetValue(_pageMode.SelectedViewIndex, out viewIndex) ? viewIndex : 1;
+                    ChangeHomePage(_pageMode.SelectedViewIndex, viewIndex);
                 }
             };
         }
@@ -169,10 +176,14 @@ namespace MauiHmiFrame_KupaKuper
         /// </summary>
         /// <param name="selectedViewIndex"></param>
         /// <exception cref="NotImplementedException"></exception>
-        private void ChangeHomePage(uint selectedViewIndex)
+        private void ChangeHomePage(uint selectedViewIndex,uint selectedLableIndex)
         {
             if (!(Pages.Count > 0)) return;
-            if (Pages[(int)selectedViewIndex-1].Count > 0) switchViews.ViewSource = Pages[(int)selectedViewIndex - 1];
+            if (Pages[(int)selectedViewIndex - 1].Count > 0)
+            {
+                switchViews.SetViewSource(Pages[(int)selectedViewIndex - 1], selectedLableIndex);
+                TopPagNowIndx = (TopPagIndx)(int)selectedViewIndex;
+            }
         }
 
         /// <summary>
@@ -224,7 +235,7 @@ namespace MauiHmiFrame_KupaKuper
                     Pages.Add(SystemSetPage);
                 });
             });
-            ChangeHomePage(1);
+            ChangeHomePage(1, 1);
         }
 
         private void ChangeUser(int user)
@@ -235,7 +246,7 @@ namespace MauiHmiFrame_KupaKuper
         }
 
         // 添加上一页记录列表
-        private List<uint> LastPage = new();
+        private List<(uint,uint)> LastPage = new();
 
         // 返回上一页的按钮点击事件
         private void LogeButton_Clicked(object sender, EventArgs e)
@@ -244,10 +255,12 @@ namespace MauiHmiFrame_KupaKuper
             {
                 // 移除当前页
                 LastPage.RemoveAt(LastPage.Count - 1);
+                //获取上一页的组别索引
+                uint previousPage = LastPage.LastOrDefault().Item1;
                 // 获取上一页的索引
-                uint previousPage = LastPage.LastOrDefault();
-                // 更新ViewModel中的索引，这会触发页面切换
-                switchViews.ChangeViewShow(previousPage);
+                uint previousView = LastPage.LastOrDefault().Item2;
+                // 更新switchViews的绑定页面组
+                ChangeHomePage(previousPage, previousView);
                 // 移除上一页记录（因为切换时会重新添加）
                 LastPage.RemoveAt(LastPage.Count - 1);
             }
@@ -279,7 +292,11 @@ namespace MauiHmiFrame_KupaKuper
         /// <param name="ViewIndex"></param>
         private void SwitchViews_CurrentViewChanged(uint ViewIndex)
         {
-            LastPage.Add(ViewIndex);
+            LastPage.Add(((_pageMode.SelectedViewIndex), ViewIndex));
+            if (!PageLastViewIndex.TryAdd(_pageMode.SelectedViewIndex, ViewIndex))
+            {
+                PageLastViewIndex[_pageMode.SelectedViewIndex] = ViewIndex;
+            }
         }
     }
 

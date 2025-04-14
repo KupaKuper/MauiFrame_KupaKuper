@@ -2,7 +2,24 @@
 <?xaml-comp compile="true" ?>
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:MauiHmiFrame_KupaKuper.Converters">
+    
+    <!--页面切换指示器的颜色转换器-->
+    <converters:ViewIndexToColorConverter x:Key="ViewIndexToColorConverter"/>
+    <!--标签颜色-->
+    <Color x:Key="blueColor">#00adb5</Color>
+    <!-- 主界面顶栏按钮样式 -->
+    <Style x:Key="HomeButtonStyle" TargetType="Button">
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="BackgroundColor" Value="Black" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="VerticalOptions" Value="Fill" />
+        <Setter Property="CornerRadius" Value="13" />
+        <Setter Property="Padding" Value="{OnIdiom 10, Phone=2}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightTextColor}, Dark={StaticResource DarkTextColor}}" />
+        <Setter Property="Shadow" Value="{StaticResource ButtonShadowStyle}" />
+    </Style>
 
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
@@ -130,13 +147,6 @@
                 </VisualStateGroup>
             </VisualStateGroupList>
         </Setter>
-    </Style>
-
-    <Style TargetType="Frame">
-        <Setter Property="HasShadow" Value="False" />
-        <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
-        <Setter Property="CornerRadius" Value="8" />
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
     </Style>
 
     <Style TargetType="ImageButton">

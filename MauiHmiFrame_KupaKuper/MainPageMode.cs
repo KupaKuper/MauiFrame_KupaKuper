@@ -36,7 +36,16 @@ namespace MauiHmiFrame_KupaKuper
         /// </summary>
         [ObservableProperty]
         public Command<string> setViewCommand;
-
+        /// <summary>
+        /// 页面切换按钮的宽度
+        /// </summary>
+        [ObservableProperty]
+        public double pageButtonWidth = 50;
+        /// <summary>
+        /// 页面切换按钮的宽度
+        /// </summary>
+        [ObservableProperty]
+        public double logButtonWidth = 200;
         private void ConnectEll()
         {
             PlcConnect = PlcClient.Plc_Connect;

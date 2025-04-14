@@ -13,18 +13,18 @@
     <Grid RowDefinitions="auto,*" Padding="0,0,0,3">
         <Grid Grid.Row="0" ColumnSpacing="{OnIdiom 10,Phone=0}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
-                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
-                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
-                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
-                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
-                <ColumnDefinition Width="{OnIdiom 200,Phone=140}"/>
-                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
-                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
-                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
+                <ColumnDefinition Width="{Binding PageButtonWidth}"/>
+                <ColumnDefinition Width="{Binding PageButtonWidth}"/>
+                <ColumnDefinition Width="{Binding PageButtonWidth}"/>
+                <ColumnDefinition Width="{Binding PageButtonWidth}"/>
+                <ColumnDefinition Width="{Binding PageButtonWidth}"/>
+                <ColumnDefinition Width="{Binding PageButtonWidth}"/>
+                <ColumnDefinition Width="{Binding PageButtonWidth}"/>
+                <ColumnDefinition Width="{Binding PageButtonWidth}"/>
+                <ColumnDefinition Width="{Binding LogButtonWidth}"/>
                 <ColumnDefinition Width="{OnIdiom *,Phone=*}"/>
-                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
-                <ColumnDefinition Width="{OnIdiom 67,Phone=61}"/>
+                <ColumnDefinition Width="{Binding PageButtonWidth}"/>
+                <ColumnDefinition Width="{Binding PageButtonWidth}"/>
             </Grid.ColumnDefinitions>
             <myControl:HmiButton x:Name="Go_HomePage"
                 Grid.Column="0"
@@ -74,6 +74,6 @@
                 TextColor="{Binding IsAdmini, Converter={StaticResource BoolToColorConverter},ConverterParameter='orangeColor,Gray500'}"
                 FontFamily="iconfont" Text="&#xe606;" FontSize="{OnIdiom 35, Phone=27}" FontAttributes="Bold" Style="{StaticResource Key=HomeButtonStyle}"/>
         </Grid>
-        <myControl:SwitchableContentView Grid.Row="1" ViewSource="{Binding CurrentViews}" x:Name="switchViews" CurrentViewChanged="SwitchViews_CurrentViewChanged"/>
+        <myControl:SwitchableContentView Grid.Row="1" x:Name="switchViews" CurrentViewChanged="SwitchViews_CurrentViewChanged"/>
     </Grid>
 </ContentPage>
