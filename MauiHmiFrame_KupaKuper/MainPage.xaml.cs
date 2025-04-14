@@ -158,8 +158,6 @@ namespace MauiHmiFrame_KupaKuper
         private void InitVM()
         {
             BindingContext = _pageMode;
-            _pageMode.PageButtonWidth = Math.Min(this.Width / 14, 50);
-            _pageMode.LogButtonWidth = Math.Min(this.Width / 14 * 3, 200);
             // 监听SelectedViewIndex的变化
             _pageMode.PropertyChanged += (s, e) =>
             {
@@ -297,6 +295,12 @@ namespace MauiHmiFrame_KupaKuper
             {
                 PageLastViewIndex[_pageMode.SelectedViewIndex] = ViewIndex;
             }
+        }
+
+        private void ContentPage_SizeChanged(object sender, EventArgs e)
+        {
+            _pageMode.PageButtonWidth = Math.Min(this.Width / 14, 57);
+            _pageMode.LogButtonWidth = Math.Min(this.Width / 14 * 3, 200);
         }
     }
 

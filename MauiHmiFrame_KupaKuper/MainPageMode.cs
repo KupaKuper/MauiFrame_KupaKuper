@@ -40,7 +40,7 @@ namespace MauiHmiFrame_KupaKuper
         /// 页面切换按钮的宽度
         /// </summary>
         [ObservableProperty]
-        public double pageButtonWidth = 50;
+        public double pageButtonWidth = 57;
         /// <summary>
         /// 页面切换按钮的宽度
         /// </summary>

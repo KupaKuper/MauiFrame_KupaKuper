@@ -10,7 +10,7 @@ namespace MauiHmiFrame_KupaKuper.Converters
             {
                 if (int.TryParse(targetView, out int target))
                 {
-                    if (Application.Current?.Resources.TryGetValue("blueColor", out var blueColor) == true)
+                    if (Application.Current?.Resources.TryGetValue("HmoeButtonColor", out var blueColor) == true)
                     {
                         return new SolidColorBrush(currentView == target ? (Color)blueColor : Colors.Transparent);
                     }
