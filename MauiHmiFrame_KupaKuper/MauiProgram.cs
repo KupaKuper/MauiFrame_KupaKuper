@@ -3,6 +3,7 @@
 using LocalizationResourceManager.Maui;
 
 using MauiHmiFrame_KupaKuper.Resources;
+using KupaKuper_MauiControl;
 
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Platform;
@@ -27,6 +28,9 @@ namespace MauiHmiFrame_KupaKuper
             builder
                .UseMauiApp<App>()
                .ConfigureKupaKuper_HmiViewLibrary(); // 调用类库的配置方法
+            builder
+               .UseMauiApp<App>()
+               .ConfigureKupaKuper_MauiControlLibrary(); // 调用类库的配置方法
             builder
             .UseLocalizationResourceManager(settings =>
             {

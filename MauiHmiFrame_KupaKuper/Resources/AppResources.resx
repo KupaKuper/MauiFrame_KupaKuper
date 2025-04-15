@@ -221,4 +221,10 @@
     <value>写入时出错</value>
     <comment>写入时出错</comment>
   </data>
+  <data name="伸出" xml:space="preserve">
+    <value>伸出</value>
+  </data>
+  <data name="缩回" xml:space="preserve">
+    <value>缩回</value>
+  </data>
 </root>

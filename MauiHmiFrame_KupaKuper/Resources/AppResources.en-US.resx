@@ -195,4 +195,10 @@
   <data name="WriteErr" xml:space="preserve">
     <value>Error on write</value>
   </data>
+  <data name="伸出" xml:space="preserve">
+    <value>GoWork</value>
+  </data>
+  <data name="缩回" xml:space="preserve">
+    <value>GoHome</value>
+  </data>
 </root>
