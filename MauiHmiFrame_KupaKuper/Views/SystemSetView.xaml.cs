@@ -1,3 +1,5 @@
+using KupaKuper_MauiControl.Converters;
+
 using LocalizationResourceManager.Maui;
 
 using System.Globalization;
@@ -28,6 +30,7 @@ namespace MauiHmiFrame_KupaKuper.Views
                 check_Zh.IsEnabled = false;
                 check_En.IsEnabled = true;
                 resourceManager.CurrentCulture = new CultureInfo("ch");
+                GetTextLanguage.Language = Language.Chanese;
             }
         }
 
@@ -39,6 +42,7 @@ namespace MauiHmiFrame_KupaKuper.Views
                 check_En.IsEnabled = false;
                 check_Zh.IsEnabled = true;
                 resourceManager.CurrentCulture = new CultureInfo("en-US");
+                GetTextLanguage.Language = Language.Englinsh;
             }
         }
 
