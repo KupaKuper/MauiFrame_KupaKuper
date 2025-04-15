@@ -6,13 +6,15 @@
              xmlns:local="clr-namespace:MauiHmiFrame_KupaKuper"
              x:DataType="local:MainPageMode"
              x:Class="MauiHmiFrame_KupaKuper.MainPage"
-             SizeChanged="ContentPage_SizeChanged">
+             SizeChanged="ContentPage_SizeChanged"
+             BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackColor}, Light={StaticResource LightBackColor}}">
     <ContentPage.Resources>
         <ResourceDictionary Source="/Resources/MyStyles.xaml;assembly=KupaKuper_HmiView"/>
         <ResourceDictionary Source="/Resources/MyStyles.xaml;assembly=KupaKuper_MauiControl"/>
         <ResourceDictionary Source="/Resources/Styles/Styles.xaml"/>
     </ContentPage.Resources>
-    <Grid RowDefinitions="auto,*" Padding="0,0,0,3">
+    <Grid RowDefinitions="auto,*" Padding="0,0,0,3" 
+          BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackColor}, Light={StaticResource LightBackColor}}">
         <Grid Grid.Row="0" ColumnSpacing="{OnIdiom 10,Phone=0}" Padding="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="{Binding PageButtonWidth}"/>

@@ -229,8 +229,8 @@ namespace MauiHmiFrame_KupaKuper
                     Pages.Add(VisionPage);
                     Pages.Add(AlarmPage);
                     Pages.Add(DataPage);
-                    Pages.Add(LoginPage);
                     Pages.Add(SystemSetPage);
+                    Pages.Add(LoginPage);
                 });
             });
             ChangeHomePage(1, 1);

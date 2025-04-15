@@ -18,10 +18,15 @@
         <Setter Property="VerticalOptions" Value="Fill" />
         <Setter Property="CornerRadius" Value="13" />
         <Setter Property="Padding" Value="{OnIdiom 5, Phone=2}" />
-        <Setter Property="TextColor" Value="{AppThemeBinding Light='Black', Dark='White'}" />
-        <Setter Property="Shadow" Value="{StaticResource HomeButtonShadowStyle}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightTextColor}, Dark={StaticResource DarkTextColor}}" />
+        <Setter Property="Shadow" Value="{StaticResource ButtonShadowStyle}" />
     </Style>
-    
+    <!--系统颜色-->
+    <!--白色背景-->
+    <Color x:Key="LightBackColor">#f6f6f6f6</Color>
+    <!--黑色背景-->
+    <Color x:Key="DarkBackColor">#393e46</Color>
+
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
     </Style>
