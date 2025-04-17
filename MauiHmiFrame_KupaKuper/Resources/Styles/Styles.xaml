@@ -23,9 +23,9 @@
     </Style>
     <!--系统颜色-->
     <!--白色背景-->
-    <Color x:Key="LightBackColor">#f6f6f6f6</Color>
+    <Color x:Key="LightBackColor">#f8fbf8</Color>
     <!--黑色背景-->
-    <Color x:Key="DarkBackColor">#393e46</Color>
+    <Color x:Key="DarkBackColor">#2b2b2b</Color>
 
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
