@@ -14,14 +14,22 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <Grid RowDefinitions="*,auto,*" ColumnDefinitions="*,auto,100">
-        <Image Grid.RowSpan="3" Grid.ColumnSpan="3" BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackColor}, Light={StaticResource LightBackColor}}" Source="{Binding PictureBackgroud}"/>
-        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderStyle}">
-            <Grid RowDefinitions="190,70,70,20,50" ColumnDefinitions="40,120,80,80" Padding="10" ColumnSpacing="10" BackgroundColor="{AppThemeBinding Light={StaticResource LightLineUpColor}, Dark={StaticResource DarkLineDownColor}}">
-                <Image Grid.Row="0" Grid.ColumnSpan="4" BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackColor}, Light={StaticResource LightBackColor}}" Source="{Binding PictureAdr}"/>
-                <Label Grid.Row="1" Grid.Column="0" HorizontalTextAlignment="End" VerticalTextAlignment="Center" FontSize="40" FontFamily="iconfont" Text="&#xe60f;"/>
-                <Picker Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HeightRequest="30" BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackColor}, Light={StaticResource LightBackColor}}" />
+        <Image Grid.RowSpan="3" Grid.ColumnSpan="3"  Aspect="Fill" Source="loginbackimage.png"/>
+        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderStyle}" Background="{AppThemeBinding Dark={StaticResource DarkBackColor}, Light={StaticResource White}}">
+            <Grid RowDefinitions="190,70,70,20,50" ColumnDefinitions="40,120,80,80" Padding="10" ColumnSpacing="10" Background="Transparent">
+                <Image Grid.Row="0" Grid.ColumnSpan="4" BackgroundColor="Transparent" Source="hj.png"/>
                 <Label Grid.Row="2" Grid.Column="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="40" FontFamily="iconfont" Text="&#xe606;"/>
-                <Editor x:Name="PasswordBox" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HeightRequest="30" BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackColor}, Light={StaticResource LightBackColor}}" VerticalTextAlignment="Center" Placeholder="{localization:Translate AdminPassword}" Keyboard="Numeric" Completed="PasswordBox_Completed"/>
+                <Editor x:Name="PasswordBox" 
+                        Grid.Row="2" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="3" 
+                        HeightRequest="30" 
+                        Style="{StaticResource EditorStyle}" 
+                        BackgroundColor="{StaticResource LightButtonColor}" 
+                        VerticalTextAlignment="Center" 
+                        Placeholder="{localization:Translate AdminPassword}" 
+                        Keyboard="Numeric" 
+                        Completed="PasswordBox_Completed"/>
                 <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" VerticalTextAlignment="Start" Text="{Binding TitlText}" FontSize="12" TextColor="Red"/>
                 <Button x:Name="LoginOp" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Text="{localization:Translate OpLogin}" Style="{StaticResource HmiButtonStyle}" Clicked="LoginOp_Clicked"/>
                 <Button x:Name="LoginAdmin" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Text="{localization:Translate AdminLogin}" Style="{StaticResource HmiButtonStyle}" Clicked="LoginAdmin_Clicked"/>

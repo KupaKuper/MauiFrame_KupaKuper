@@ -12,10 +12,6 @@ namespace MauiHmiFrame_KupaKuper.ViewModes
         public string password = "1120";
         [ObservableProperty]
         public string titlText = "";
-        [ObservableProperty]
-        public ImageSource pictureAdr = "C:\\Users\\26060\\Pictures\\Camera Roll\\HJ.png";
-        [ObservableProperty]
-        public ImageSource pictureBackgroud = "C:\\Users\\26060\\Pictures\\背景2.png";
 
         public override uint ViewIndex { get; set; }
         public override string ViewName { get => _viewName; set => _viewName = value; }
@@ -23,7 +19,7 @@ namespace MauiHmiFrame_KupaKuper.ViewModes
 
         public override void CloseViewVisible()
         {
-            ;
+            
         }
 
         public override void OnViewVisible()
@@ -33,7 +29,7 @@ namespace MauiHmiFrame_KupaKuper.ViewModes
 
         public override void UpdataView()
         {
-            ;
+            
         }
     }
 }

@@ -90,7 +90,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="DatePicker">
+    <Style x:Key="PickerStyle" TargetType="Picker">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
@@ -111,7 +111,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="Editor">
+    <Style x:Key="EditorStyle" TargetType="Editor">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
