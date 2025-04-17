@@ -260,6 +260,7 @@ namespace MauiHmiFrame_KupaKuper
                 uint previousView = LastPage.LastOrDefault().Item2;
                 // 更新switchViews的绑定页面组
                 ChangeHomePage(previousPage, previousView);
+                _pageMode.SelectedViewIndex = previousPage;
                 // 移除上一页记录（因为切换时会重新添加）
                 LastPage.RemoveAt(LastPage.Count - 1);
             }
