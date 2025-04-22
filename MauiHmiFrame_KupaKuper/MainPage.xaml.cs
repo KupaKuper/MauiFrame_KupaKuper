@@ -5,6 +5,7 @@ using KupaKuper_IO.Ethernet;
 
 using LocalizationResourceManager.Maui;
 
+using MauiHmiFrame_KupaKuper.Help;
 using MauiHmiFrame_KupaKuper.Views;
 
 namespace MauiHmiFrame_KupaKuper
@@ -64,14 +65,14 @@ namespace MauiHmiFrame_KupaKuper
             return true;
         }
         #region 页面定义合集
-        private readonly List<Dictionary<uint, ContentView>> Pages=new();
-        private readonly Dictionary<uint, ContentView> HomePage=new();
-        private readonly Dictionary<uint, ContentView> SettingPage=new();
-        private readonly Dictionary<uint, ContentView> VisionPage=new();
-        private readonly Dictionary<uint, ContentView> AlarmPage=new();
-        private readonly Dictionary<uint, ContentView> DataPage=new();
-        private readonly Dictionary<uint, ContentView> SystemSetPage=new();
-        private readonly Dictionary<uint, ContentView> LoginPage=new();
+        private readonly List<Dictionary<uint, ContentView>> Pages = new();
+        private readonly Dictionary<uint, ContentView> HomePage = new();
+        private readonly Dictionary<uint, ContentView> SettingPage = new();
+        private readonly Dictionary<uint, ContentView> VisionPage = new();
+        private readonly Dictionary<uint, ContentView> AlarmPage = new();
+        private readonly Dictionary<uint, ContentView> DataPage = new();
+        private readonly Dictionary<uint, ContentView> SystemSetPage = new();
+        private readonly Dictionary<uint, ContentView> LoginPage = new();
         /// <summary>
         /// 首页
         /// </summary>
@@ -175,7 +176,7 @@ namespace MauiHmiFrame_KupaKuper
         /// </summary>
         /// <param name="selectedViewIndex"></param>
         /// <exception cref="NotImplementedException"></exception>
-        private void ChangeHomePage(uint selectedViewIndex,uint selectedLableIndex)
+        private void ChangeHomePage(uint selectedViewIndex, uint selectedLableIndex)
         {
             if (!(Pages.Count > 0)) return;
             if (Pages[(int)selectedViewIndex - 1].Count > 0)
@@ -245,7 +246,7 @@ namespace MauiHmiFrame_KupaKuper
         }
 
         // 添加上一页记录列表
-        private List<(uint,uint)> LastPage = new();
+        private List<(uint, uint)> LastPage = new();
 
         // 返回上一页的按钮点击事件
         private void LogeButton_Clicked(object sender, EventArgs e)
