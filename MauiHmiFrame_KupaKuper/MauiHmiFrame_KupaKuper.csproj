@@ -70,10 +70,13 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-		<PackageReference Include="KupaKuper_HmiView" Version="1.1.4" />
 		<PackageReference Include="LocalizationResourceManager.Maui" Version="1.2.2" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.60" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\MauiLibrary_KupaKuper\KupaKuper_HmiView\KupaKuper_HmiView.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

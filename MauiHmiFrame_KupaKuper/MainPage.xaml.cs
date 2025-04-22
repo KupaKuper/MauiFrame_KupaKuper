@@ -159,6 +159,7 @@ namespace MauiHmiFrame_KupaKuper
         private void InitVM()
         {
             BindingContext = _pageMode;
+            //调试开关
             KupaKuper_MauiControl.ControlModes.BaseViewMode.IsDebug = true;
             // 监听SelectedViewIndex的变化
             _pageMode.PropertyChanged += (s, e) =>
