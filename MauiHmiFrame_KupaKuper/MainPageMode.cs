@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 using KupaKuper_HmiView.ContentViews;
+using KupaKuper_HmiView.HelpVoid;
 
 using KupaKuper_IO.Ethernet;
 
@@ -53,23 +54,32 @@ namespace MauiHmiFrame_KupaKuper
 
         public MainPageMode()
         {
-            PlcClient.ReadClient.ClientUrl = PlcClient.Device.deviceMessage.DeviceAddress;
-            PlcClient.WriteClient.ClientUrl = PlcClient.Device.deviceMessage.DeviceAddress;
-            PlcClient.connectEll += ConnectEll;
+            SetViewCommand = new Command<string>(
+            execute: (viewIndex) =>
+            {
+                if (int.TryParse(viewIndex, out int index))
+                {
+                    SelectedViewIndex = (uint)index;
+                }
+            });
+
+            if (PlcClient.TryReadConfig())
+            {
+                PlcClient.plcModel = PlcClient.Device.deviceMessage.DeviceType;
+                if (PlcClient.ReadClient != null) PlcClient.ReadClient.ClientUrl = PlcClient.Device.deviceMessage.DeviceAddress;
+                if (PlcClient.WriteClient != null) PlcClient.WriteClient.ClientUrl = PlcClient.Device.deviceMessage.DeviceAddress;
+                PlcClient.connectEll += ConnectEll;
+            }
+            else
+            {
+                DisplayAlertHelp.TryDisplayAlert("读取出错", "配置文件读取错误,请检查文件是否存在或文件格式是否正确", "关闭");
+                return;
+            }
             List<string> vars = new();
             foreach (var item in PlcClient.Device.cyclicReadListConfig.CyclicReadList)
             {
                 vars.Add(item.PlcVarAddress);
             }
-            SetViewCommand = new Command<string>(
-                execute: (viewIndex) =>
-                {
-                    if (int.TryParse(viewIndex, out int index))
-                    {
-                        SelectedViewIndex = (uint)index;
-                    }
-                }
-            );
         }
     }
 }
