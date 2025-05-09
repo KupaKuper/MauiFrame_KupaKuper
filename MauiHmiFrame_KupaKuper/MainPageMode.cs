@@ -60,6 +60,7 @@ namespace MauiHmiFrame_KupaKuper
                 if (int.TryParse(viewIndex, out int index))
                 {
                     SelectedViewIndex = (uint)index;
+                    ChangePageIndex?.Invoke(SelectedViewIndex);
                 }
             });
 
@@ -81,5 +82,6 @@ namespace MauiHmiFrame_KupaKuper
                 vars.Add(item.PlcVarAddress);
             }
         }
+        public Action<uint>? ChangePageIndex;
     }
 }

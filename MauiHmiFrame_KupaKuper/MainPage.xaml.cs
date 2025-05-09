@@ -126,8 +126,9 @@ namespace MauiHmiFrame_KupaKuper
         /// </summary>
         private SystemSetView systemSetView;
         #endregion
+
         /// <summary>
-        /// 初始化
+        /// 初始化其它
         /// </summary>
         private void Initialize()
         {
@@ -156,19 +157,19 @@ namespace MauiHmiFrame_KupaKuper
             Initialize();
         }
 
+        /// <summary>
+        /// 初始化加载
+        /// </summary>
         private void InitVM()
         {
             BindingContext = _pageMode;
             //调试开关
             KupaKuper_MauiControl.ControlModes.BaseViewMode.IsDebug = true;
             // 监听SelectedViewIndex的变化
-            _pageMode.PropertyChanged += (s, e) =>
+            _pageMode.ChangePageIndex = n =>
             {
-                if (e.PropertyName == nameof(_pageMode.SelectedViewIndex))
-                {
-                    uint viewIndex = PageLastViewIndex.TryGetValue(_pageMode.SelectedViewIndex, out viewIndex) ? viewIndex : 1;
-                    ChangeHomePage(_pageMode.SelectedViewIndex, viewIndex);
-                }
+                uint viewIndex = PageLastViewIndex.TryGetValue(n, out viewIndex) ? viewIndex : 1;
+                ChangeHomePage(n, viewIndex);
             };
         }
 
@@ -182,7 +183,7 @@ namespace MauiHmiFrame_KupaKuper
             if (!(Pages.Count > 0)) return;
             if (Pages[(int)selectedViewIndex - 1].Count > 0)
             {
-                switchViews.SetViewSource(Pages[(int)selectedViewIndex - 1], selectedLableIndex);
+                switchViews.ViewSource = Pages[(int)selectedViewIndex - 1];
                 TopPagNowIndx = (TopPagIndx)(int)selectedViewIndex;
             }
         }
@@ -192,7 +193,9 @@ namespace MauiHmiFrame_KupaKuper
         /// </summary>
         private static UserType UserName { get; set; } = UserType.Operator;
 
-
+        /// <summary>
+        /// 初始化页面加载和分类
+        /// </summary>
         private void InitializeViews()
         {
             //提前加载需要的界面
@@ -238,7 +241,10 @@ namespace MauiHmiFrame_KupaKuper
             });
             ChangeHomePage(1, 1);
         }
-
+        /// <summary>
+        /// 切换用户类型
+        /// </summary>
+        /// <param name="user"></param>
         private void ChangeUser(int user)
         {
             UserName = (UserType)user;
@@ -246,42 +252,46 @@ namespace MauiHmiFrame_KupaKuper
             System.Diagnostics.Debug.WriteLine($"用户类型已切换至{UserName}");
         }
 
-        // 添加上一页记录列表
-        private List<(uint, uint)> LastPage = new();
-
-        // 返回上一页的按钮点击事件
+        /// <summary>
+        /// loge按钮点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LogeButton_Clicked(object sender, EventArgs e)
         {
-            if (LastPage.Count > 1) // 修改为 > 1，确保至少有一个历史记录
+            var page = switchViews.ShowLastView().Item1;
+            if (page!=null)
             {
-                // 移除当前页
-                LastPage.RemoveAt(LastPage.Count - 1);
-                //获取上一页的组别索引
-                uint previousPage = LastPage.LastOrDefault().Item1;
-                // 获取上一页的索引
-                uint previousView = LastPage.LastOrDefault().Item2;
-                // 更新switchViews的绑定页面组
-                ChangeHomePage(previousPage, previousView);
-                _pageMode.SelectedViewIndex = previousPage;
-                // 移除上一页记录（因为切换时会重新添加）
-                LastPage.RemoveAt(LastPage.Count - 1);
+                _pageMode.SelectedViewIndex = (uint)Pages.IndexOf(page) + 1;
             }
         }
-
+        /// <summary>
+        /// 启动按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StartButton_Clicked(object sender, EventArgs e)
         {
             var var = PlcClient.Device.mainSystem.Start;
             if (var.PlcVarAddress == "") return;
             PlcVarSend.ButtonClicked_SetTrue(var);
         }
-
+        /// <summary>
+        /// 停止按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StopButton_Clicked(object sender, EventArgs e)
         {
             var var = PlcClient.Device.mainSystem.Pause;
             if (var.PlcVarAddress == "") return;
             PlcVarSend.ButtonClicked_SetTrue(var);
         }
-
+        /// <summary>
+        /// 复位按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ResetButton_Clicked(object sender, EventArgs e)
         {
             var var = PlcClient.Device.mainSystem.Reset;
@@ -294,13 +304,13 @@ namespace MauiHmiFrame_KupaKuper
         /// <param name="ViewIndex"></param>
         private void SwitchViews_CurrentViewChanged(uint ViewIndex)
         {
-            LastPage.Add(((_pageMode.SelectedViewIndex), ViewIndex));
-            if (!PageLastViewIndex.TryAdd(_pageMode.SelectedViewIndex, ViewIndex))
-            {
-                PageLastViewIndex[_pageMode.SelectedViewIndex] = ViewIndex;
-            }
+            
         }
-
+        /// <summary>
+        /// 页面大小改变时触发
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ContentPage_SizeChanged(object sender, EventArgs e)
         {
             _pageMode.PageButtonWidth = Math.Min(this.Width / 14, 57);
